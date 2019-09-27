@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TicTacToe
+{
+    public class MiniMaxNode
+    {
+        public MiniMaxNode(Board board, int currentPosition, Board.Cell currentMove, int depth)
+        {
+            this.ChildNodes = new List<MiniMaxNode>();
+            this.UpdatedCellIndex = currentPosition;
+            board.Cells[this.UpdatedCellIndex] = currentMove;
+            
+            if (board.GetState()== Board.State.ComputerWins)
+            {
+                this.Score = 100 - depth;
+            }
+            else if(board.GetState()== Board.State.HumanWins)
+            {
+                this.Score = -100 - depth;
+            }
+            else if(board.GetState()== Board.State.Draw)
+            {
+                this.Score = 0 - depth;
+            }
+            else
+            {
+                Board.Cell nextMove = currentMove == Board.Cell.Computer ? Board.Cell.Human : Board.Cell.Computer;
+
+                for (int i = 0; i < Board.BOARD_SIZE; i++)
+                {
+                    if (board.Cells[i] == Board.Cell.Empty)
+                    {
+                        Board childBoard = board.Clone();
+                        MiniMaxNode miniMaxNode = new MiniMaxNode(childBoard, i, nextMove, depth + 1);
+                        ChildNodes.Add(miniMaxNode);
+                    }
+                }
+            }
+        }
+
+        public List<MiniMaxNode> ChildNodes { get; private set; }
+
+        public int Score { get; private set; }
+
+        public int UpdatedCellIndex { get; private set; }
+    }
+}

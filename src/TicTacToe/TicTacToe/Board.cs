@@ -174,14 +174,19 @@ namespace TicTacToe
             }
         }
 
-        private string CellToString(Cell cell)
+        public static string CellToString(Cell cell)
         {
             switch (cell)
             {
                 case Cell.Computer: return "X";
-                case Cell.Empty: return "0";
+                case Cell.Human: return "0";
                 default: return " ";
             }
+        }
+
+        public Board Clone()
+        {
+            return new Board(this.Cells);
         }
     }
 }
