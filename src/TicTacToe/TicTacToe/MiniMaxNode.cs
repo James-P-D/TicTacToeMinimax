@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TicTacToe
 {
@@ -31,7 +27,7 @@ namespace TicTacToe
                 // Invert the player
                 Board.Cell nextMove = currentMove == Board.Cell.Computer ? Board.Cell.Human : Board.Cell.Computer;
 
-                for (int i = 0; i < Board.BOARD_SIZE; i++)
+                for (int i = 0; i < Board.BoardSize; i++)
                 {
                     if (board.Cells[i] == Board.Cell.Empty)
                     {

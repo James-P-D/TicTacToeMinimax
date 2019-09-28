@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TicTacToe
 {
@@ -10,14 +7,14 @@ namespace TicTacToe
     {
         public enum Cell { Computer, Human, Empty };
         public enum State { ComputerWins, HumanWins, Draw, Incomplete };
-        public const int BOARD_WIDTH = 3;
-        public const int BOARD_HEIGHT = 3;
-        public const int BOARD_SIZE = BOARD_WIDTH * BOARD_HEIGHT;
+        public const int BoardWidth = 3;
+        public const int BoardHeight = 3;
+        public const int BoardSize = BoardWidth * BoardHeight;
 
         public Board()
         {
-            this.Cells = new Cell[BOARD_SIZE];
-            for (int i = 0; i < BOARD_SIZE; i++)
+            this.Cells = new Cell[BoardSize];
+            for (int i = 0; i < BoardSize; i++)
             {
                 this.Cells[i] = Cell.Empty;
             }
@@ -25,12 +22,12 @@ namespace TicTacToe
 
         public Board(Cell[] initialCells)
         {
-            if (initialCells.Length != BOARD_SIZE)
+            if (initialCells.Length != BoardSize)
             {
                 throw new Exception("Board size does not match");
             }
-            this.Cells = new Cell[BOARD_SIZE];
-            for (int i = 0; i < BOARD_SIZE; i++)
+            this.Cells = new Cell[BoardSize];
+            for (int i = 0; i < BoardSize; i++)
             {
                 this.Cells[i] = initialCells[i];
             }
@@ -38,12 +35,12 @@ namespace TicTacToe
 
         public bool IsMatch(Board otherBoard)
         {
-            if (otherBoard.Cells.Length != BOARD_SIZE)
+            if (otherBoard.Cells.Length != BoardSize)
             {
                 throw new Exception("Board size does not match");
             }
 
-            for (int i = 0; i < BOARD_SIZE; i++)
+            for (int i = 0; i < BoardSize; i++)
             {
                 if (this.Cells[i] != otherBoard.Cells[i])
                 {

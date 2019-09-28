@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TicTacToe
 {
     public partial class Form1 : Form
     {
-        private Board board;
-        private bool CurrentMoveIsHuman = true;
+        private Board _board;
+        private bool _currentMoveIsHuman = true;
 
         public Form1()
         {
@@ -26,7 +19,7 @@ namespace TicTacToe
         private void StartButton_Click(object sender, EventArgs e)
         {
             this.startButton.Enabled = false;
-            this.board = new Board();
+            this._board = new Board();
             /*
              * this.board = new Board(new Board.Cell[] {
                 Board.Cell.Computer, Board.Cell.Empty, Board.Cell.Human,
@@ -37,16 +30,16 @@ namespace TicTacToe
             this.DrawBoard();
             this.bottomInformationTextBox.Text = string.Empty;
 
-            if (this.CurrentMoveIsHuman)
+            if (this._currentMoveIsHuman)
             {
                 this.topInformationTextBox.Text = "Human's turn";
             }
             else
             {
                 this.topInformationTextBox.Text="Computer's turn";
-                MiniMaxTree miniMaxTree = new MiniMaxTree(board);
+                MiniMaxTree miniMaxTree = new MiniMaxTree(_board);
                 MiniMaxNode bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
-                board.Cells[bestMove.UpdatedCellIndex] = Board.Cell.Computer;
+                _board.Cells[bestMove.UpdatedCellIndex] = Board.Cell.Computer;
                 this.Process();
             }
         }
@@ -54,43 +47,43 @@ namespace TicTacToe
         private void Process()
         {
             this.DrawBoard();
-            if (this.board.GetState() == Board.State.ComputerWins)
+            if (this._board.GetState() == Board.State.ComputerWins)
             {
                 this.bottomInformationTextBox.Text = "Computer Wins!";
                 this.DisableAllCellButtons();
                 this.topInformationTextBox.Text = "Press Start to play a game";
                 this.startButton.Enabled = true;
-                this.CurrentMoveIsHuman = !this.CurrentMoveIsHuman;
+                this._currentMoveIsHuman = !this._currentMoveIsHuman;
             }
-            else if (this.board.GetState() == Board.State.HumanWins)
+            else if (this._board.GetState() == Board.State.HumanWins)
             {
                 this.bottomInformationTextBox.Text = "Human Wins!";
                 this.DisableAllCellButtons();
                 this.topInformationTextBox.Text = "Press Start to play a game";
                 this.startButton.Enabled = true;
-                this.CurrentMoveIsHuman = !this.CurrentMoveIsHuman;
+                this._currentMoveIsHuman = !this._currentMoveIsHuman;
             }
-            else if (this.board.GetState() == Board.State.Draw)
+            else if (this._board.GetState() == Board.State.Draw)
             {
                 this.bottomInformationTextBox.Text = "Draw!";
                 this.DisableAllCellButtons();
                 this.topInformationTextBox.Text = "Press Start to play a game";
                 this.startButton.Enabled = true;
-                this.CurrentMoveIsHuman = !this.CurrentMoveIsHuman;
+                this._currentMoveIsHuman = !this._currentMoveIsHuman;
             }
             else
             {
-                this.CurrentMoveIsHuman = !this.CurrentMoveIsHuman;
-                if (this.CurrentMoveIsHuman)
+                this._currentMoveIsHuman = !this._currentMoveIsHuman;
+                if (this._currentMoveIsHuman)
                 {
                     this.topInformationTextBox.Text = "Human's turn";
                 }
                 else
                 {
                     this.topInformationTextBox.Text = "Computer's turn";
-                    MiniMaxTree miniMaxTree = new MiniMaxTree(board);
+                    MiniMaxTree miniMaxTree = new MiniMaxTree(_board);
                     MiniMaxNode bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
-                    board.Cells[bestMove.UpdatedCellIndex] = Board.Cell.Computer;
+                    _board.Cells[bestMove.UpdatedCellIndex] = Board.Cell.Computer;
                     this.Process();
                 }
             }
@@ -98,17 +91,17 @@ namespace TicTacToe
 
         private void DrawBoard()
         {
-            SetButtonCell(topLeftButton, board.Cells[0]);
-            SetButtonCell(topCenterButton, board.Cells[1]);
-            SetButtonCell(topRightButton, board.Cells[2]);
+            SetButtonCell(topLeftButton, _board.Cells[0]);
+            SetButtonCell(topCenterButton, _board.Cells[1]);
+            SetButtonCell(topRightButton, _board.Cells[2]);
 
-            SetButtonCell(middleLeftButton, board.Cells[3]);
-            SetButtonCell(middleCenterButton, board.Cells[4]);
-            SetButtonCell(middleRightButton, board.Cells[5]);
+            SetButtonCell(middleLeftButton, _board.Cells[3]);
+            SetButtonCell(middleCenterButton, _board.Cells[4]);
+            SetButtonCell(middleRightButton, _board.Cells[5]);
 
-            SetButtonCell(bottomLeftButton, board.Cells[6]);
-            SetButtonCell(bottomCenterButton, board.Cells[7]);
-            SetButtonCell(bottomRightButton, board.Cells[8]);
+            SetButtonCell(bottomLeftButton, _board.Cells[6]);
+            SetButtonCell(bottomCenterButton, _board.Cells[7]);
+            SetButtonCell(bottomRightButton, _board.Cells[8]);
         }
 
         private void SetButtonCell(Button button, Board.Cell cell)
@@ -169,55 +162,55 @@ namespace TicTacToe
 
         private void TopLeftButton_Click(object sender, EventArgs e)
         {
-            this.board.Cells[0] = Board.Cell.Human;
+            this._board.Cells[0] = Board.Cell.Human;
             this.Process();
         }
 
         private void TopCenterButton_Click(object sender, EventArgs e)
         {
-            this.board.Cells[1] = Board.Cell.Human;
+            this._board.Cells[1] = Board.Cell.Human;
             this.Process();
         }
 
         private void TopRightButton_Click(object sender, EventArgs e)
         {
-            this.board.Cells[2] = Board.Cell.Human;
+            this._board.Cells[2] = Board.Cell.Human;
             this.Process();
         }
 
         private void MiddleLeftButton_Click(object sender, EventArgs e)
         {
-            this.board.Cells[3] = Board.Cell.Human;
+            this._board.Cells[3] = Board.Cell.Human;
             this.Process();
         }
 
         private void MiddleCenterButton_Click(object sender, EventArgs e)
         {
-            this.board.Cells[4] = Board.Cell.Human;
+            this._board.Cells[4] = Board.Cell.Human;
             this.Process();
         }
 
         private void MiddleRightButton_Click(object sender, EventArgs e)
         {
-            this.board.Cells[5] = Board.Cell.Human;
+            this._board.Cells[5] = Board.Cell.Human;
             this.Process();
         }
 
         private void BottomLeftButton_Click(object sender, EventArgs e)
         {
-            this.board.Cells[6] = Board.Cell.Human;
+            this._board.Cells[6] = Board.Cell.Human;
             this.Process();
         }
 
         private void BottomCenterButton_Click(object sender, EventArgs e)
         {
-            this.board.Cells[7] = Board.Cell.Human;
+            this._board.Cells[7] = Board.Cell.Human;
             this.Process();
         }
 
         private void BottomRightButton_Click(object sender, EventArgs e)
         {
-            this.board.Cells[8] = Board.Cell.Human;
+            this._board.Cells[8] = Board.Cell.Human;
             this.Process();
         }
 

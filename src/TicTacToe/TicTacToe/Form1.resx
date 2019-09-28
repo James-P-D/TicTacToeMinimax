@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Form1_Form1_Press_Start_to_play_a_game" xml:space="preserve">
+    <value>Press Start to play a game</value>
+  </data>
+  <data name="Form1_Process_Human_Wins_" xml:space="preserve">
+    <value>Human Wins!</value>
+  </data>
+  <data name="Board_Output___0_____1_____2__" xml:space="preserve">
+    <value> {0} | {1} | {2} </value>
+  </data>
 </root>

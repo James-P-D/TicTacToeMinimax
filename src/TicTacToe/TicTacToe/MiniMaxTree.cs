@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TicTacToe
 {
@@ -14,7 +10,7 @@ namespace TicTacToe
             // will always be computer.
 
             this.ChildNodes = new List<MiniMaxNode>();
-            for (int i = 0; i < Board.BOARD_SIZE; i++)
+            for (int i = 0; i < Board.BoardSize; i++)
             {
                 if (board.Cells[i] == Board.Cell.Empty)
                 {
