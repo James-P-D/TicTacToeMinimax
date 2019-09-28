@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using TicTacToe.Properties;
 
 namespace TicTacToe
 {
@@ -12,7 +13,7 @@ namespace TicTacToe
         public Form1()
         {
             InitializeComponent();
-            this.topInformationTextBox.Text = "Press Start to play a game";
+            this.topInformationTextBox.Text = Resources.Form1_Press_Start_to_play_a_game;
             this.DisableAllCellButtons();
         }
 
@@ -32,11 +33,11 @@ namespace TicTacToe
 
             if (this._currentMoveIsHuman)
             {
-                this.topInformationTextBox.Text = "Human's turn";
+                this.topInformationTextBox.Text = Resources.Form1_Humans_turn;
             }
             else
             {
-                this.topInformationTextBox.Text="Computer's turn";
+                this.topInformationTextBox.Text= Resources.Form1_Computers_turn;
                 MiniMaxTree miniMaxTree = new MiniMaxTree(_board);
                 MiniMaxNode bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
                 _board.Cells[bestMove.UpdatedCellIndex] = Board.Cell.Computer;
@@ -49,25 +50,25 @@ namespace TicTacToe
             this.DrawBoard();
             if (this._board.GetState() == Board.State.ComputerWins)
             {
-                this.bottomInformationTextBox.Text = "Computer Wins!";
+                this.bottomInformationTextBox.Text = Resources.Form1_Computer_wins;
                 this.DisableAllCellButtons();
-                this.topInformationTextBox.Text = "Press Start to play a game";
+                this.topInformationTextBox.Text = Resources.Form1_Press_Start_to_play_a_game;
                 this.startButton.Enabled = true;
                 this._currentMoveIsHuman = !this._currentMoveIsHuman;
             }
             else if (this._board.GetState() == Board.State.HumanWins)
             {
-                this.bottomInformationTextBox.Text = "Human Wins!";
+                this.bottomInformationTextBox.Text = Resources.Form1_Human_wins;
                 this.DisableAllCellButtons();
-                this.topInformationTextBox.Text = "Press Start to play a game";
+                this.topInformationTextBox.Text = Resources.Form1_Press_Start_to_play_a_game;
                 this.startButton.Enabled = true;
                 this._currentMoveIsHuman = !this._currentMoveIsHuman;
             }
             else if (this._board.GetState() == Board.State.Draw)
             {
-                this.bottomInformationTextBox.Text = "Draw!";
+                this.bottomInformationTextBox.Text = Resources.From1_Draw;
                 this.DisableAllCellButtons();
-                this.topInformationTextBox.Text = "Press Start to play a game";
+                this.topInformationTextBox.Text = Resources.Form1_Press_Start_to_play_a_game;
                 this.startButton.Enabled = true;
                 this._currentMoveIsHuman = !this._currentMoveIsHuman;
             }
@@ -76,11 +77,11 @@ namespace TicTacToe
                 this._currentMoveIsHuman = !this._currentMoveIsHuman;
                 if (this._currentMoveIsHuman)
                 {
-                    this.topInformationTextBox.Text = "Human's turn";
+                    this.topInformationTextBox.Text = Resources.Form1_Humans_turn;
                 }
                 else
                 {
-                    this.topInformationTextBox.Text = "Computer's turn";
+                    this.topInformationTextBox.Text = Resources.Form1_Computers_turn;
                     MiniMaxTree miniMaxTree = new MiniMaxTree(_board);
                     MiniMaxNode bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
                     _board.Cells[bestMove.UpdatedCellIndex] = Board.Cell.Computer;
