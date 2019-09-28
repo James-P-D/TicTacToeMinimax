@@ -18,8 +18,8 @@ namespace TicTacToe
             {
                 if (board.Cells[i] == Board.Cell.Empty)
                 {
-                    Board childBoard = board.Clone();                    
-                    MiniMaxNode miniMaxNode =new MiniMaxNode(childBoard, i, Board.Cell.Computer, 1);
+                    Board childBoard = board.Clone();
+                    MiniMaxNode miniMaxNode = new MiniMaxNode(childBoard, i, Board.Cell.Computer, 0);
                     ChildNodes.Add(miniMaxNode);
                 }
             }
