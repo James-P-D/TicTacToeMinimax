@@ -129,21 +129,6 @@ namespace TicTacToe
             }
         }
 
-        private void EnableAllCellButtons()
-        {
-            topLeftButton.Enabled = true;
-            topCenterButton.Enabled = true;
-            topRightButton.Enabled = true;
-
-            middleLeftButton.Enabled = true;
-            middleCenterButton.Enabled = true;
-            middleRightButton.Enabled = true;
-
-            bottomLeftButton.Enabled = true;
-            bottomCenterButton.Enabled = true;
-            bottomRightButton.Enabled = true;
-        }
-
         private void DisableAllCellButtons()
         {
             topLeftButton.Enabled = false;
