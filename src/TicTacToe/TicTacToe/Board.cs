@@ -5,12 +5,40 @@ namespace TicTacToe
 {
     public class Board
     {
+        /// <summary>
+        /// Cell enum. Each cell is either Computer, Human or currently empty
+        /// </summary>
         public enum Cell { Computer, Human, Empty };
+
+        /// <summary>
+        /// The board can be in four possible states. Either someone has won,
+        /// it's a draw, or the game is incomplete
+        /// </summary>
         public enum State { ComputerWins, HumanWins, Draw, Incomplete };
+
+        /// <summary>
+        /// Board width
+        /// </summary>
         public const int BoardWidth = 3;
+
+        /// <summary>
+        /// Board height
+        /// </summary>
         public const int BoardHeight = 3;
+
+        /// <summary>
+        /// Board size (height * width)
+        /// </summary>
         public const int BoardSize = BoardWidth * BoardHeight;
 
+        /// <summary>
+        /// Actual Cell array. Will be BoardSize in length.
+        /// </summary>
+        public Cell[] Cells { get; set; }
+
+        /// <summary>
+        /// Board constructor. Initialise all cells to empty.
+        /// </summary>
         public Board()
         {
             this.Cells = new Cell[BoardSize];
@@ -20,39 +48,28 @@ namespace TicTacToe
             }
         }
 
+        /// <summary>
+        /// Board constructor. Initialise cells to input parameter.
+        /// Used for cloning boards.
+        /// </summary>
+        /// <param name="initialCells">Array of Cells</param>
         public Board(Cell[] initialCells)
         {
             if (initialCells.Length != BoardSize)
             {
                 throw new Exception("Board size does not match");
             }
+
             this.Cells = new Cell[BoardSize];
             for (int i = 0; i < BoardSize; i++)
             {
                 this.Cells[i] = initialCells[i];
             }
         }
-
-        public bool IsMatch(Board otherBoard)
-        {
-            if (otherBoard.Cells.Length != BoardSize)
-            {
-                throw new Exception("Board size does not match");
-            }
-
-            for (int i = 0; i < BoardSize; i++)
-            {
-                if (this.Cells[i] != otherBoard.Cells[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public Cell[] Cells { get; set; }
-
+        
+        /// <summary>
+        /// Output the current board. Used for debugging online.
+        /// </summary>
         public void Output()
         {
             Console.WriteLine(" {0} | {1} | {2} ", CellToString(this.Cells[0]), CellToString(this.Cells[1]), CellToString(this.Cells[2]));
@@ -62,6 +79,10 @@ namespace TicTacToe
             Console.WriteLine(" {0} | {1} | {2} ", CellToString(this.Cells[6]), CellToString(this.Cells[7]), CellToString(this.Cells[8]));
         }
 
+        /// <summary>
+        /// Get the current state (human won, computer won, draw, or incomplete)
+        /// </summary>
+        /// <returns></returns>
         public State GetState()
         {
             // Check Rows
@@ -171,6 +192,11 @@ namespace TicTacToe
             }
         }
 
+        /// <summary>
+        /// Convert cell to a string (Computer is 'X', Human is '0')
+        /// </summary>
+        /// <param name="cell">Individual cell</param>
+        /// <returns>String for Cell ('X', '0' or ' ')</returns>
         public static string CellToString(Cell cell)
         {
             switch (cell)
@@ -181,6 +207,10 @@ namespace TicTacToe
             }
         }
 
+        /// <summary>
+        /// Make a copy of the board
+        /// </summary>
+        /// <returns></returns>
         public Board Clone()
         {
             return new Board(this.Cells);

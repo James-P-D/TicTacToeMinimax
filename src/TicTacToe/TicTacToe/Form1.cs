@@ -7,9 +7,19 @@ namespace TicTacToe
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Local variable for the actual board
+        /// </summary>
         private Board _board;
+
+        /// <summary>
+        /// Boolean for toggling whether the current move is for human or computer
+        /// </summary>
         private bool _currentMoveIsHuman = true;
 
+        /// <summary>
+        /// Form constructor
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -17,6 +27,12 @@ namespace TicTacToe
             this.DisableAllCellButtons();
         }
 
+        /// <summary>
+        /// Start a game. Clear the board, display the UI and if the first move is human,
+        /// let the user click a button, otherwise use Minimax to calculate computer move.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartButton_Click(object sender, EventArgs e)
         {
             this.startButton.Enabled = false;
@@ -45,6 +61,11 @@ namespace TicTacToe
             }
         }
 
+        /// <summary>
+        /// Main method for actually processing the board. Update the UI and check to see
+        /// if someone has won, or we have a draw. If the game is not yet over, let the user
+        /// press a button, or calculate the next computer move accordingly.
+        /// </summary>
         private void Process()
         {
             this.DrawBoard();
@@ -74,13 +95,19 @@ namespace TicTacToe
             }
             else
             {
+                // The game hasn't finished yet (noone has won and it isn't a draw), so invert
+                // the current-move boolean.
                 this._currentMoveIsHuman = !this._currentMoveIsHuman;
                 if (this._currentMoveIsHuman)
                 {
+                    // If the next move is human, set the text box and do nothing (wait for
+                    // user to actually press a button)
                     this.topInformationTextBox.Text = Resources.Form1_Humans_turn;
                 }
                 else
                 {
+                    // If the next move is computer, use Minimax to calculate the next move
+                    // based on the current board
                     this.topInformationTextBox.Text = Resources.Form1_Computers_turn;
                     MiniMaxTree miniMaxTree = new MiniMaxTree(_board);
                     MiniMaxNode bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
@@ -90,6 +117,10 @@ namespace TicTacToe
             }
         }
 
+        /// <summary>
+        /// Draw the board. Set the text for each cell, and disable any
+        /// buttons that have already been set to a Nought or Cross
+        /// </summary>
         private void DrawBoard()
         {
             SetButtonCell(topLeftButton, _board.Cells[0]);
@@ -105,6 +136,12 @@ namespace TicTacToe
             SetButtonCell(bottomRightButton, _board.Cells[8]);
         }
 
+        /// <summary>
+        /// Set the text (Nought or Cross) for a button, and then
+        /// disable it so user cannot click it again during this game.
+        /// </summary>
+        /// <param name="button">Button to set</param>
+        /// <param name="cell">Nought, Cross or Empty</param>
         private void SetButtonCell(Button button, Board.Cell cell)
         {
             switch (cell)
@@ -129,6 +166,10 @@ namespace TicTacToe
             }
         }
 
+        /// <summary>
+        /// Disable all 9 buttons. Called when game is over because either someone won
+        /// or we reached a draw
+        /// </summary>
         private void DisableAllCellButtons()
         {
             topLeftButton.Enabled = false;
