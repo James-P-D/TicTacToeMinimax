@@ -25,16 +25,16 @@ namespace TicTacToe
             else
             {
                 // Invert the player
-                Board.Cell nextMove = currentMove == Board.Cell.Computer ? Board.Cell.Human : Board.Cell.Computer;
+                var nextMove = currentMove == Board.Cell.Computer ? Board.Cell.Human : Board.Cell.Computer;
 
-                for (int i = 0; i < Board.BoardSize; i++)
+                for (var i = 0; i < Board.BoardSize; i++)
                 {
                     if (board.Cells[i] == Board.Cell.Empty)
                     {
-                        Board childBoard = board.Clone();
-                        MiniMaxNode miniMaxNode = new MiniMaxNode(childBoard, i, nextMove, depth + 1);
+                        var childBoard = board.Clone();
+                        var miniMaxNode = new MiniMaxNode(childBoard, i, nextMove, depth + 1);
                         ChildNodes.Add(miniMaxNode);
-
+                        //THIS SCORE NEEDS TO BE THE min/max ACROSS ALL SUB-NODES!
                         if (miniMaxNode.Score < 0)
                         {
                             this.Score = miniMaxNode.Score + depth;
@@ -52,10 +52,10 @@ namespace TicTacToe
             }
         }
 
-        public List<MiniMaxNode> ChildNodes { get; private set; }
+        public List<MiniMaxNode> ChildNodes { get; }
 
-        public int Score { get; private set; }
+        public int Score { get; }
 
-        public int UpdatedCellIndex { get; private set; }
+        public int UpdatedCellIndex { get; }
     }
 }

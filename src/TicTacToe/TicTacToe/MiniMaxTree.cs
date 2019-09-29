@@ -10,17 +10,17 @@ namespace TicTacToe
             // will always be computer.
 
             this.ChildNodes = new List<MiniMaxNode>();
-            for (int i = 0; i < Board.BoardSize; i++)
+            for (var i = 0; i < Board.BoardSize; i++)
             {
                 if (board.Cells[i] == Board.Cell.Empty)
                 {
-                    Board childBoard = board.Clone();
-                    MiniMaxNode miniMaxNode = new MiniMaxNode(childBoard, i, Board.Cell.Computer, 0);
+                    var childBoard = board.Clone();
+                    var miniMaxNode = new MiniMaxNode(childBoard, i, Board.Cell.Computer, 0);
                     ChildNodes.Add(miniMaxNode);
                 }
             }
         }
 
-        public List<MiniMaxNode> ChildNodes { get; private set; }
+        public List<MiniMaxNode> ChildNodes { get; }
     }
 }
