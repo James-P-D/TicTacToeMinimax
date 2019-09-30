@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace TicTacToe
 {
@@ -12,11 +13,11 @@ namespace TicTacToe
 
             if (board.GetState() == Board.State.ComputerWins)
             {
-                this.Score = 10;
+                this.Score = 10 - depth;
             }
             else if (board.GetState() == Board.State.HumanWins)
             {
-                this.Score = -10;
+                this.Score = -10 + depth;
             }
             else if (board.GetState() == Board.State.Draw)
             {
@@ -34,20 +35,16 @@ namespace TicTacToe
                         var childBoard = board.Clone();
                         var miniMaxNode = new MiniMaxNode(childBoard, i, nextMove, depth + 1);
                         ChildNodes.Add(miniMaxNode);
-                        //THIS SCORE NEEDS TO BE THE min/max ACROSS ALL SUB-NODES!
-                        if (miniMaxNode.Score < 0)
-                        {
-                            this.Score = miniMaxNode.Score + depth;
-                        }
-                        else if (miniMaxNode.Score > 0)
-                        {
-                            this.Score = miniMaxNode.Score - depth;
-                        }
-                        else
-                        {
-                            this.Score = 0;
-                        }
                     }
+                }
+
+                if (currentMove == Board.Cell.Computer)
+                {
+                    this.Score = this.ChildNodes.OrderBy(n => n.Score).Last().Score;
+                }
+                else
+                {
+                    this.Score = this.ChildNodes.OrderBy(n => n.Score).First().Score;
                 }
             }
         }
