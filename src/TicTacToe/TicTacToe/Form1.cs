@@ -54,8 +54,8 @@ namespace TicTacToe
             else
             {
                 this.topInformationTextBox.Text= Resources.Form1_Computers_turn;
-                MiniMaxTree miniMaxTree = new MiniMaxTree(_board);
-                MiniMaxNode bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
+                var miniMaxTree = new MiniMaxTree(_board);
+                var bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
                 _board.Cells[bestMove.UpdatedCellIndex] = Board.Cell.Computer;
                 this.Process();
             }
@@ -109,8 +109,8 @@ namespace TicTacToe
                     // If the next move is computer, use Minimax to calculate the next move
                     // based on the current board
                     this.topInformationTextBox.Text = Resources.Form1_Computers_turn;
-                    MiniMaxTree miniMaxTree = new MiniMaxTree(_board);
-                    MiniMaxNode bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
+                    var miniMaxTree = new MiniMaxTree(_board);
+                    var bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
                     _board.Cells[bestMove.UpdatedCellIndex] = Board.Cell.Computer;
                     this.Process();
                 }

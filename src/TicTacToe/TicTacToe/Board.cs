@@ -42,7 +42,7 @@ namespace TicTacToe
         public Board()
         {
             this.Cells = new Cell[BoardSize];
-            for (int i = 0; i < BoardSize; i++)
+            for (var i = 0; i < BoardSize; i++)
             {
                 this.Cells[i] = Cell.Empty;
             }
@@ -61,7 +61,7 @@ namespace TicTacToe
             }
 
             this.Cells = new Cell[BoardSize];
-            for (int i = 0; i < BoardSize; i++)
+            for (var i = 0; i < BoardSize; i++)
             {
                 this.Cells[i] = initialCells[i];
             }
