@@ -40,11 +40,11 @@ namespace TicTacToe
 
                 if (currentMove == Board.Cell.Computer)
                 {
-                    this.Score = this.ChildNodes.OrderBy(n => n.Score).Last().Score;
+                    this.Score = this.ChildNodes.OrderBy(n => n.Score).First().Score;
                 }
                 else
                 {
-                    this.Score = this.ChildNodes.OrderBy(n => n.Score).First().Score;
+                    this.Score = this.ChildNodes.OrderBy(n => n.Score).Last().Score;
                 }
             }
         }
