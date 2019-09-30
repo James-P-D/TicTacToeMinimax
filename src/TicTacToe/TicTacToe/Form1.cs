@@ -55,7 +55,7 @@ namespace TicTacToe
             {
                 this.topInformationTextBox.Text= Resources.Form1_Computers_turn;
                 var miniMaxTree = new MiniMaxTree(_board);
-                var bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
+                var bestMove = miniMaxTree.GetBestMove();
                 _board.Cells[bestMove.UpdatedCellIndex] = Board.Cell.Computer;
                 this.Process();
             }
@@ -110,7 +110,7 @@ namespace TicTacToe
                     // based on the current board
                     this.topInformationTextBox.Text = Resources.Form1_Computers_turn;
                     var miniMaxTree = new MiniMaxTree(_board);
-                    var bestMove = miniMaxTree.ChildNodes.OrderBy(n => n.Score).Last();
+                    var bestMove = miniMaxTree.GetBestMove();
                     _board.Cells[bestMove.UpdatedCellIndex] = Board.Cell.Computer;
                     this.Process();
                 }

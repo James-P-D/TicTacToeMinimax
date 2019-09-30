@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TicTacToe
 {
@@ -21,6 +23,15 @@ namespace TicTacToe
             }
         }
 
-        public List<MiniMaxNode> ChildNodes { get; }
+        public MiniMaxNode GetBestMove()
+        {
+            int bestScore = this.ChildNodes.OrderBy(n => n.Score).Last().Score;
+            var bestMoves = this.ChildNodes.Where(n => n.Score == bestScore).ToArray();
+            Random random = new Random(DateTime.Now.Millisecond);
+
+            return bestMoves[random.Next(bestMoves.Count())];
+        }
+
+        private List<MiniMaxNode> ChildNodes { get; }
     }
 }
