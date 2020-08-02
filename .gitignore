@@ -1,0 +1,5 @@
+*.suo
+/src/TicTacToe/.vs
+/src/TicTacToe/TicTacToe/*.user
+/src/TicTacToe/TicTacToe/obj
+/src/TicTacToe/TicTacToe/bin
